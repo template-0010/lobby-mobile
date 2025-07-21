@@ -29,41 +29,41 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'root',
     component: Layout,
-    redirect: '/home',
+    redirect: '/mine',
     children: [
-      {
-        path: 'home',
-        component: () => import('@/pages/home/index.vue'),
-        name: 'Home',
-        meta: {
-          title: 'system.i18nSystem.label.dashboard',
-          keepAlive: true,
-          showTabbar: true,
-          alwaysShow: false,
-        },
-      },
-      {
-        path: 'activity',
-        component: () => import('@/pages/activity/index.vue'),
-        name: 'Activity',
-        meta: {
-          title: 'web.i18nFront.label.mine',
-          keepAlive: true,
-          showTabbar: true,
-          alwaysShow: false,
-        },
-      },
-      {
-        path: 'recharge',
-        component: () => import('@/pages/recharge/index.vue'),
-        name: 'Recharge',
-        meta: {
-          title: 'web.i18nFront.label.mine',
-          keepAlive: true,
-          showTabbar: true,
-          alwaysShow: false,
-        },
-      },
+      // {
+      //   path: 'home',
+      //   component: () => import('@/pages/home/index.vue'),
+      //   name: 'Home',
+      //   meta: {
+      //     title: 'system.i18nSystem.label.dashboard',
+      //     keepAlive: true,
+      //     showTabbar: true,
+      //     alwaysShow: false,
+      //   },
+      // },
+      // {
+      //   path: 'activity',
+      //   component: () => import('@/pages/activity/index.vue'),
+      //   name: 'Activity',
+      //   meta: {
+      //     title: 'web.i18nFront.label.mine',
+      //     keepAlive: true,
+      //     showTabbar: true,
+      //     alwaysShow: false,
+      //   },
+      // },
+      // {
+      //   path: 'recharge',
+      //   component: () => import('@/pages/recharge/index.vue'),
+      //   name: 'Recharge',
+      //   meta: {
+      //     title: 'web.i18nFront.label.mine',
+      //     keepAlive: true,
+      //     showTabbar: true,
+      //     alwaysShow: false,
+      //   },
+      // },
       {
         path: 'chat',
         component: () => import('@/pages/chat/index.vue'),

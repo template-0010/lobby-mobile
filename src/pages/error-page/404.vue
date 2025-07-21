@@ -1,10 +1,7 @@
 <script lang="ts" setup>
 const router = useRouter()
 function goHome() {
-  if (window.history.state.back)
-    history.back()
-  else
-    router.replace('/')
+  router.replace('/mine')
 }
 </script>
 

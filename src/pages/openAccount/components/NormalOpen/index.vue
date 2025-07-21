@@ -11,6 +11,7 @@ interface RuleForm {
   bonusGroupOffi: number
   bonusGroupSelf: number
   bonusGroupThird: number
+  bonusGroupDeposit: number
   loginPassword: string
   nickName: string
   userName: string
@@ -23,11 +24,13 @@ const userStore = useUserStore()
 const bonusGroupOffi = computed(() => userStore.userInfo.bonusGroupOffi)
 const bonusGroupSelf = computed(() => userStore.userInfo.bonusGroupSelf)
 const bonusGroupThird = computed(() => userStore.userInfo.bonusGroupThird)
+const bonusGroupDeposit = computed(() => userStore.userInfo.bonusGroupDeposit)
 
 const openForm = ref<RuleForm>({
   bonusGroupOffi: Number(bonusGroupOffi.value || 0),
   bonusGroupSelf: Number(bonusGroupSelf.value || 0),
   bonusGroupThird: Number(bonusGroupThird.value || 0),
+  bonusGroupDeposit: Number(bonusGroupDeposit.value || 0),
   loginPassword: '',
   nickName: '',
   userName: '',
@@ -40,6 +43,7 @@ function resetForm() {
     bonusGroupOffi: Number(bonusGroupOffi.value || 0),
     bonusGroupSelf: Number(bonusGroupSelf.value || 0),
     bonusGroupThird: Number(bonusGroupThird.value || 0),
+    bonusGroupDeposit: Number(bonusGroupDeposit.value || 0),
     loginPassword: '',
     nickName: '',
     userName: '',
@@ -95,6 +99,17 @@ function validateAboradLott(val: string) {
   }
   return true
 };
+
+function validateDepositLott(val: string) {
+  if (typeof val === 'undefined') {
+    return t('system.i18nSystem.placeholder.input')
+  }
+  const numVal = Number(val)
+  if (numVal < 0 || numVal > Number(bonusGroupDeposit.value || 0)) {
+    return t('web.i18nFront.hint.rangeError', { max: bonusGroupDeposit.value })
+  }
+  return true
+}
 </script>
 
 <template>
@@ -169,6 +184,17 @@ function validateAboradLott(val: string) {
         :placeholder="$t('system.i18nSystem.placeholder.input')"
         clearable
         :rules="[{ required: true, validator: validateAboradLott, message: $t('system.i18nSystem.placeholder.input') }]"
+      />
+      <van-field
+        v-model.number="openForm.bonusGroupDeposit"
+        name="bonusGroupDeposit"
+        label-width="100px"
+        colon
+        required
+        :label="$t('web.i18nFront.label.bonusGroupDeposit')"
+        :placeholder="$t('system.i18nSystem.placeholder.input')"
+        clearable
+        :rules="[{ required: true, validator: validateDepositLott, message: $t('system.i18nSystem.placeholder.input') }]"
       />
     </van-cell-group>
 
