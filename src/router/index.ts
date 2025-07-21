@@ -268,6 +268,13 @@ const router = createRouter({
   routes,
 })
 
+/**
+ * 重置路由
+ */
+export function resetRouter() {
+  router.replace({ path: '/login' })
+}
+
 router.beforeEach((to: EnhancedRouteLocation, _, next) => {
   NProgress.start()
   // for cache routes
@@ -275,12 +282,13 @@ router.beforeEach((to: EnhancedRouteLocation, _, next) => {
   // token auth
   const token = kkAuth.getToken()
   const userInfo = kkAuth.getUserInfo()
-  console.log('to.meta.needLogin', to.meta.needLogin)
-  console.log('token', token)
-  console.log('userInfo', userInfo)
+  if (to.path === '/login' && token && userInfo.userID) {
+    next('/mine')
+    return
+  }
   if (!to.meta.noAuth && (!token || !userInfo.userID)) {
     next('/login')
-    router.replace('/login')
+    // router.replace('/login')
     // userStore.setLoginModalState(true)
   }
   else {
