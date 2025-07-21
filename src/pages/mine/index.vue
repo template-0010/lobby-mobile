@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount } from 'vue'
-import { showToast } from 'vant'
+import { showLoadingToast, showToast } from 'vant'
 import Header from './components/Header/index.vue'
 import TitleCard from './components/TitleCard/index.vue'
 import CellRow from './components/CellRow/index.vue'
@@ -63,12 +63,26 @@ const list = [
     image: localImg('images/wm.png'),
     path: '/help-center',
   },
-  {
-    title: t('web.i18nFront.label.aboutUs'),
-    image: localImg('images/wm.png'),
-    path: '/about',
-  },
+  // {
+  //   title: t('web.i18nFront.label.aboutUs'),
+  //   image: localImg('images/wm.png'),
+  //   path: '/about',
+  // },
 ]
+
+const showConfirm = ref(false)
+
+function logout() {
+  const toast = showLoadingToast({
+    duration: 0,
+    forbidClick: true,
+  })
+  userStore.logout().then(() => {
+    userStore.resetToken()
+    router.replace({ path: '/login' })
+    showConfirm.value = false
+  }).finally(() => toast.close())
+}
 
 function onClickItem(item: Record<string, any>) {
   const { path } = item || {}
@@ -145,7 +159,7 @@ onBeforeMount(() => {
           </template>
         </CellRow> -->
         <LanguageSwitch type="custom-cell" :show-bottom-line="true" />
-        <CellRow :show-bottom-line="false" :title="$t('web.i18nFront.label.clearCache')">
+        <CellRow :show-bottom-line="false" :title="$t('web.i18nFront.label.logout2')" @click="showConfirm = true">
           <template #left>
             <IconClear />
           </template>
@@ -153,5 +167,12 @@ onBeforeMount(() => {
       </TitleCard>
     </div>
     <KKFooter />
+    <CustomDialog
+      v-model:show="showConfirm"
+      :close-on-click-overlay="true"
+      :desc="$t('system.i18nSystem.hint.cfmLogout')"
+      @on-cancel="showConfirm = false"
+      @on-confirm="logout"
+    />
   </div>
 </template>

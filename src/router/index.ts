@@ -5,7 +5,7 @@ import 'nprogress/nprogress.css'
 
 import type { EnhancedRouteLocation } from './types'
 import { kkAuth } from '@/01-kk-system/allUtils/kkAuth'
-import { useUserStoreHook } from '@/store/modules/user'
+// import { useUserStoreHook } from '@/store/modules/user'
 import { useRouteCacheStoreHook } from '@/store/modules/routeCache'
 
 NProgress.configure({ showSpinner: true, parent: '#app' })
@@ -14,9 +14,17 @@ const Layout = () => import('@/layout/index.vue')
 
 const routeCacheStore = useRouteCacheStoreHook()
 
-const userStore = useUserStoreHook()
+// const userStore = useUserStoreHook()
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/pages/login/index.vue'),
+    meta: {
+      noAuth: true,
+    },
+  },
   {
     path: '/',
     name: 'root',
@@ -74,7 +82,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: 'web.i18nFront.label.mine',
           keepAlive: true,
-          // needLogin: true,
+          needLogin: true,
           showTabbar: true,
           alwaysShow: false,
         },
@@ -267,9 +275,13 @@ router.beforeEach((to: EnhancedRouteLocation, _, next) => {
   // token auth
   const token = kkAuth.getToken()
   const userInfo = kkAuth.getUserInfo()
-  if (to.meta.needLogin && !token && !userInfo.userID) {
-    next('/')
-    userStore.setLoginModalState(true)
+  console.log('to.meta.needLogin', to.meta.needLogin)
+  console.log('token', token)
+  console.log('userInfo', userInfo)
+  if (!to.meta.noAuth && (!token || !userInfo.userID)) {
+    next('/login')
+    router.replace('/login')
+    // userStore.setLoginModalState(true)
   }
   else {
     next()

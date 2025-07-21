@@ -22,18 +22,18 @@ const active = ref('home')
 // const { width } = useElementSize(topBorderRef)
 
 const Tabbars = [
-  {
-    label: '首页',
-    icon: IconHome,
-    name: 'home',
-    path: '/home',
-  },
-  {
-    label: '优惠',
-    icon: IconHistory,
-    name: 'activity',
-    path: '/activity',
-  },
+  // {
+  //   label: '首页',
+  //   icon: IconHome,
+  //   name: 'home',
+  //   path: '/home',
+  // },
+  // {
+  //   label: '优惠',
+  //   icon: IconHistory,
+  //   name: 'activity',
+  //   path: '/activity',
+  // },
   {
     label: '客服',
     icon: IconChat,

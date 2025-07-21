@@ -83,7 +83,7 @@ function openService() {
       </p>
     </div>
     <van-row>
-      <van-col span="6">
+      <van-col span="8">
         <TabItem
           :title="$t('web.i18nFront.label.recharge')" :show-rigth-line="false"
           @click="emit('openWallet', 'deposit')"
@@ -91,7 +91,7 @@ function openService() {
           <IconWithdraw />
         </TabItem>
       </van-col>
-      <van-col span="6">
+      <van-col span="8">
         <TabItem
           :title="$t('web.i18nFront.label.withdraw')" :show-rigth-line="false"
           @click="emit('openWallet', 'withdraw')"
@@ -99,12 +99,12 @@ function openService() {
           <IconTopup />
         </TabItem>
       </van-col>
-      <van-col span="6">
+      <!-- <van-col span="6">
         <TabItem :title="$t('web.i18nFront.label.transfor')" :show-rigth-line="false" @click="router.push('/transfor')">
           <IconWallet />
         </tabitem>
-      </van-col>
-      <van-col span="6">
+      </van-col> -->
+      <van-col span="8">
         <TabItem :title="$t('web.i18nFront.label.swapShort')" :show-rigth-line="false" @click="router.push('/swap')">
           <IconWallet />
         </tabitem>

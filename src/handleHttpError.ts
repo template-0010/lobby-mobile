@@ -13,7 +13,7 @@ eventEmitter.on(TOKEN_AUTH_FAIL, (data: any) => {
   console.log('TOKEN_AUTH_FAIL', data)
   const userStore = useUserStoreHook()
   userStore.resetToken()
-  userStore.setLoginModalState(true)
+  // userStore.setLoginModalState(true)
 })
 
 // http error
