@@ -63,8 +63,7 @@ function onRefresh() {
 
 // 二维码
 const qrcodeTxt = shallowRef('')
-// eslint-disable-next-line ts/ban-ts-comment
-// @ts-expect-error
+
 const qrcode = useQRCode(qrcodeTxt)
 const showQr = ref(false)
 

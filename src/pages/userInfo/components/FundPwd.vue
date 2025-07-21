@@ -7,9 +7,10 @@ import { translateTextBy } from '@/utils/i18n'
 defineOptions({
   name: 'FundPwdModal',
 })
-const props = defineProps({
-  hasFundPwd: Boolean,
-})
+const props = defineProps<{
+  hasFundPwd: boolean
+}>()
+
 const emit = defineEmits<{
   onUpdateClick: [editData: IObject]
   onRefreshPwd: [void]

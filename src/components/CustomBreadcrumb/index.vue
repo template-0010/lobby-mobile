@@ -5,11 +5,10 @@ defineOptions({
   name: 'CustomBreadcrumb',
 })
 
-defineProps({
-  showFilter: {
-    type: Boolean,
-    default: false,
-  },
+withDefaults(defineProps<{
+  showFilter: boolean
+}>(), {
+  showFilter: false,
 })
 
 const emit = defineEmits<{

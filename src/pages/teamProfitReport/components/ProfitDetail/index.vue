@@ -6,11 +6,10 @@ defineOptions({
   name: 'ProfitDetail',
 })
 
-const props = defineProps({
-  itemData: {
-    type: Object,
-    default: () => ({}),
-  },
+const props = withDefaults(defineProps<{
+  itemData: Record<string, any>
+}>(), {
+  itemData: () => ({}),
 })
 
 const visible = defineModel({ required: true, default: false })

@@ -9,19 +9,14 @@ defineOptions({
   name: 'SignModalContent',
 })
 
-const props = defineProps({
-  itemData: {
-    type: Object,
-    default: () => ({}),
-  },
-  subName: {
-    type: String,
-    default: '',
-  },
-  type: {
-    type: String,
-    default: 'create',
-  },
+const props = withDefaults(defineProps<{
+  itemData: Record<string, any>
+  subName: string
+  type: string
+}>(), {
+  itemData: () => ({}),
+  subName: '',
+  type: 'create',
 })
 
 const emit = defineEmits<{

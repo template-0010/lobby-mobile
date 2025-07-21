@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import IconHistory from '@/components/Icons/IconHistory/index.vue'
-import IconHome from '@/components/Icons/IconHome/index.vue'
 import IconChat from '@/components/Icons/IconChat/index.vue'
 import IconMine from '@/components/Icons/IconMine/index.vue'
 import type { IObject } from '@/01-kk-system/allHttp/types/common'

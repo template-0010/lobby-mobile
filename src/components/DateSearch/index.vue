@@ -7,23 +7,16 @@ defineOptions({
   name: 'DateSearch',
 })
 
-const props = defineProps({
-  gameList: {
-    type: Array<IObject>,
-    default: () => ([]),
-  },
-  nameKey: {
-    type: String,
-    default: 'label',
-  },
-  valueKey: {
-    type: String,
-    default: 'value',
-  },
-  showIncludeZero: {
-    type: Boolean,
-    default: false,
-  },
+const props = withDefaults(defineProps<{
+  gameList: IObject[]
+  nameKey: string
+  valueKey: string
+  showIncludeZero: boolean
+}>(), {
+  gameList: () => ([]),
+  nameKey: 'label',
+  valueKey: 'value',
+  showIncludeZero: false,
 })
 
 const emit = defineEmits<{
