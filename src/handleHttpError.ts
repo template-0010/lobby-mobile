@@ -1,4 +1,5 @@
 import { showNotify } from 'vant'
+import router from './router'
 import { eventEmitter } from '@/01-kk-system/allUtils/eventEmitter'
 import {
   HTTP_ERROR,
@@ -13,6 +14,7 @@ eventEmitter.on(TOKEN_AUTH_FAIL, (data: any) => {
   console.log('TOKEN_AUTH_FAIL', data)
   const userStore = useUserStoreHook()
   userStore.resetToken()
+  router.replace({ path: '/login' })
   // userStore.setLoginModalState(true)
 })
 

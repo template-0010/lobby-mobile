@@ -50,11 +50,11 @@ async function getOkWalletList() {
 }
 
 function initWallet() {
-  const curToWallet = canUseWalletList.value.find((data: any) => data.abbreviation !== userStore.currentWalletInfo.abbreviation)
-  const curFromWallet = canUseWalletList.value.find((data: any) => data.abbreviation === userStore.currentWalletInfo.abbreviation)
-  curFromWallet.value = curFromWallet ?? {}
+  const curToWalletTarget = canUseWalletList.value.find((data: any) => data.abbreviation !== userStore.currentWalletInfo.abbreviation)
+  const curFromWalletTarget = canUseWalletList.value.find((data: any) => data.abbreviation === userStore.currentWalletInfo.abbreviation)
+  curFromWallet.value = curFromWalletTarget ?? canUseWalletList.value[0] ?? {}
   formWallet.value = curFromWallet.value.abbreviation ?? ''
-  curToWallet.value = curToWallet ?? {}
+  curToWallet.value = curToWalletTarget ?? canUseWalletList.value[0] ?? {}
   toWallet.value = curToWallet.value.abbreviation ?? ''
 }
 
