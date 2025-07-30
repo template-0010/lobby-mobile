@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 export const quckDateList = [
   {
     labelKey: 'web.i18nFront.title.today',
@@ -54,6 +56,24 @@ export const expireTimeList = [
     value: 15,
     langKey: 'web.i18nFront.title.fifteenD',
     label: '十五天',
+  },
+  {
+    value: 90,
+    langKey: 'web.i18nFront.label.threeMonths',
+    label: '三个月',
+    calculater: () => dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss'),
+  },
+  {
+    value: 180,
+    langKey: 'web.i18nFront.label.halfYear',
+    label: '六个月',
+    calculater: () => dayjs().add(6, 'month').format('YYYY-MM-DD HH:mm:ss'),
+  },
+  {
+    value: 365,
+    langKey: 'web.i18nFront.label.oneYear',
+    label: '一年',
+    calculater: () => dayjs().add(1, 'year').format('YYYY-MM-DD HH:mm:ss'),
   },
   {
     value: 9999,

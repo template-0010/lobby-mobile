@@ -50,6 +50,11 @@ function onShowQR(row: IObject) {
         <p>{{ $t('system.i18nSystem.label.expireTime') }}：<span>{{ linkData.expiryTime === foreverLinkTime ? $t('web.i18nFront.title.forever') : linkData.expiryTime }}</span></p>
       </van-col>
     </van-row>
+    <van-row type="flex" justify="center" align="center" class="mt-2">
+      <van-col span="24">
+        <p>{{ $t('web.i18nFront.label.bonusGroupDeposit') }}：<span>{{ linkData.bonusGroupDeposit }}</span></p>
+      </van-col>
+    </van-row>
     <van-row type="flex" justify="center" align="center" class="my-4">
       <van-col span="24">
         <p>{{ $t('system.i18nSystem.label.remark') }}：<span>{{ linkData.remark }}</span></p>

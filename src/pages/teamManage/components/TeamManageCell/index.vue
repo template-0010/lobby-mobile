@@ -63,23 +63,15 @@ function goToSign(itemData: IObject) {
       </van-col>
     </van-row>
     <van-row>
-      <van-col span="12">
-        <span class="title">{{ `${$t('web.i18nFront.label.playerBalance')}: ` }}</span>
-        <span>{{ itemData.availableBalance }}</span>
-      </van-col>
-      <van-col span="12">
-        <span class="title">{{ `${$t('web.i18nFront.label.classicLott')}: ` }}</span>
-        <span>{{ itemData.bonusGroupOffi }}</span>
+      <van-col span="24">
+        <span class="title">{{ `${$t('web.i18nFront.label.bonusGroupDeposit')}: ` }}</span>
+        <span>{{ itemData.bonusGroupDeposit }}</span>
       </van-col>
     </van-row>
     <van-row>
-      <van-col span="12">
-        <span class="title">{{ `${$t('web.i18nFront.label.hotLott')}: ` }}</span>
-        <span>{{ itemData.bonusGroupSelf }}</span>
-      </van-col>
-      <van-col span="12">
-        <span class="title">{{ `${$t('web.i18nFront.label.aboradLott')}: ` }}</span>
-        <span>{{ itemData.bonusGroupThird }}</span>
+      <van-col span="24">
+        <span class="title">{{ `${$t('web.i18nFront.label.playerBalance')}: ` }}</span>
+        <span>{{ itemData.availableBalance }}</span>
       </van-col>
     </van-row>
     <van-row>

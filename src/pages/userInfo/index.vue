@@ -33,6 +33,10 @@ const userTypeTxt = computed(() => {
   return i18nTxt ? t(i18nTxt) : '--'
 })
 
+const bonusGroupDeposit = computed(() => {
+  return userStore.userInfo.bonusGroupDeposit || 0
+})
+
 async function checkFundPwdExist() {
   const res = await userHttp.checkFundpassword().catch(() => null)
   const { code, data } = res || {}
@@ -123,6 +127,12 @@ onBeforeMount(() => {
               {{ $t("web.i18nFront.label.ipHistory") }}
             </button>
           </div>
+        </div>
+        <div class="basic-info-item">
+          <span>
+            {{ `${$t("web.i18nFront.label.bonusGroupDeposit")}：` }}
+          </span>
+          <span>{{ bonusGroupDeposit }}</span>
         </div>
       </div>
       <div class="mt-4 px-3">

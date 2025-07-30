@@ -22,15 +22,12 @@ const { t } = useI18n()
 
 const userStore = useUserStore()
 
-const bonusGroupOffi = computed(() => userStore.userInfo.bonusGroupOffi)
-const bonusGroupSelf = computed(() => userStore.userInfo.bonusGroupSelf)
-const bonusGroupThird = computed(() => userStore.userInfo.bonusGroupThird)
 const bonusGroupDeposit = computed(() => userStore.userInfo.bonusGroupDeposit)
 
 const openForm = ref<RuleForm>({
-  bonusGroupOffi: Number(bonusGroupOffi.value || 0),
-  bonusGroupSelf: Number(bonusGroupSelf.value || 0),
-  bonusGroupThird: Number(bonusGroupThird.value || 0),
+  bonusGroupOffi: 0,
+  bonusGroupSelf: 0,
+  bonusGroupThird: 0,
   bonusGroupDeposit: Number(bonusGroupDeposit.value || 0),
   remark: '',
   expiryTime: '',
@@ -38,7 +35,7 @@ const openForm = ref<RuleForm>({
 const loading = ref(false)
 const showSelectTime = ref(false)
 const expireInfo = ref({
-  day: 0,
+  day: 90, // 默认是3个月
   label: '',
 })
 
@@ -53,16 +50,21 @@ function onSelectedTime() {
     openForm.value.expiryTime = foreverLinkTime
   }
   else {
-    const date = getDateStartAndEnd(expireInfo.value.day, 'YYYY-MM-DD')
-    openForm.value.expiryTime = `${date.end} 00:00:00`
+    if (target.calculater) {
+      openForm.value.expiryTime = target.calculater()
+    }
+    else {
+      const date = getDateStartAndEnd(expireInfo.value.day, 'YYYY-MM-DD')
+      openForm.value.expiryTime = `${date.end} 00:00:00`
+    }
   }
 }
 
 function resetForm() {
   openForm.value = {
-    bonusGroupOffi: Number(bonusGroupOffi.value || 0),
-    bonusGroupSelf: Number(bonusGroupSelf.value || 0),
-    bonusGroupThird: Number(bonusGroupThird.value || 0),
+    bonusGroupOffi: 0,
+    bonusGroupSelf: 0,
+    bonusGroupThird: 0,
     bonusGroupDeposit: Number(bonusGroupDeposit.value || 0),
     remark: '',
     expiryTime: '',
@@ -92,39 +94,6 @@ async function submitForm() {
 
 const onSubmit = useThrottleFn(submitForm, 3000)
 
-function validateClassicLott(val: string) {
-  if (typeof val === 'undefined') {
-    return t('system.i18nSystem.placeholder.input')
-  }
-  const numVal = Number(val)
-  if (numVal < 0 || numVal > Number(bonusGroupOffi.value || 0)) {
-    return t('web.i18nFront.hint.rangeError', { max: bonusGroupOffi.value })
-  }
-  return true
-}
-
-function validateHotLott(val: string) {
-  if (typeof val === 'undefined') {
-    return t('system.i18nSystem.placeholder.input')
-  }
-  const numVal = Number(val)
-  if (numVal < 0 || numVal > Number(bonusGroupSelf.value || 0)) {
-    return t('web.i18nFront.hint.rangeError', { max: bonusGroupSelf.value })
-  }
-  return true
-}
-
-function validateAboradLott(val: string) {
-  if (typeof val === 'undefined') {
-    return t('system.i18nSystem.placeholder.input')
-  }
-  const numVal = Number(val)
-  if (numVal < 0 || numVal > Number(bonusGroupThird.value || 0)) {
-    return t('web.i18nFront.hint.rangeError', { max: bonusGroupThird.value })
-  }
-  return true
-}
-
 function validateDepositLott(val: string) {
   if (typeof val === 'undefined') {
     return t('system.i18nSystem.placeholder.input')
@@ -135,6 +104,11 @@ function validateDepositLott(val: string) {
   }
   return true
 }
+
+onBeforeMount(() => {
+  expireInfo.value.day = 90
+  onSelectedTime()
+})
 </script>
 
 <template>
@@ -143,7 +117,7 @@ function validateDepositLott(val: string) {
       {{ $t("web.i18nFront.label.rebateSet") }}
     </h3>
     <van-cell-group inset class="border border-[var(--card-bg-color)] border-solid">
-      <van-field
+      <!-- <van-field
         v-model.number="openForm.bonusGroupOffi"
         name="bonusGroupOffi"
         label-width="100px"
@@ -174,7 +148,7 @@ function validateDepositLott(val: string) {
         :placeholder="$t('system.i18nSystem.placeholder.input')"
         clearable
         :rules="[{ required: true, validator: validateAboradLott, message: $t('system.i18nSystem.placeholder.input') }]"
-      />
+      /> -->
       <van-field
         v-model.number="openForm.bonusGroupDeposit"
         name="bonusGroupDeposit"
