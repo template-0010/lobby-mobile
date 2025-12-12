@@ -55,7 +55,7 @@ async function init() {
   getIosPwaThumb()
   appStore.getPlatformConfig()
   await Promise.allSettled([
-    chatStore.loadChat(), // 客服
+    chatStore.loadChat(true), // 客服
     appStore.getDiffConfig(), // 差异化
     gameStore.fetchAllGroups(), // 游戏分组
   ])
