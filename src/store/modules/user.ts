@@ -181,6 +181,22 @@ const useUserStore = defineStore('user', () => {
     // 更新用户信息和余额
     getUserInfo()
   }
+  // 更新用户的钱包、币种、用户信息
+  async function updateUserWalletInfo({ walletType, currencyCode }: { walletType: string, currencyCode: string }) {
+    // 更新当前钱包信息
+    const params = {
+      currentWalletType: walletType ?? currentWalletInfo.value.walletType,
+      currentCurrencyCode: currencyCode ?? currentWalletInfo.value.currencyCode,
+    }
+    const res = await userHttp
+      .updateCurrentwallet(params)
+      .catch(() => null)
+    const { code } = res || {}
+    if (code === '0') {
+      // 更新用户信息和余额
+      await getUserInfo()
+    }
+  }
   // 获取我的契约 - 列表 - 使用第一个数据
   async function getMyContractSalary() {
     if (myContractSalary.value.length > 0) {
@@ -226,6 +242,7 @@ const useUserStore = defineStore('user', () => {
     checkFundPwdExist,
     guestLogin,
     getFlatAvailableWalletList,
+    updateUserWalletInfo,
   }
 }, {
   persist: true,
